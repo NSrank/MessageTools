@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component;
 // import net.william278.papiproxybridge.api.PlaceholderAPI;
 import org.plugin.messagetools.config.ConfigManager;
 import org.plugin.messagetools.util.ColorUtil;
+import org.plugin.messagetools.util.UnicodeUtil;
 import org.slf4j.Logger;
 
 import java.time.LocalDateTime;
@@ -293,8 +294,11 @@ public class MessageService {
      * 处理消息中的变量
      */
     private CompletableFuture<String> processMessage(Player player, String message) {
-        // 首先替换内置变量
-        String processed = replaceBuiltinPlaceholders(player, message);
+        // 首先处理Unicode字符
+        String unicodeProcessed = UnicodeUtil.processUnicode(message);
+
+        // 然后替换内置变量
+        String processed = replaceBuiltinPlaceholders(player, unicodeProcessed);
 
         // 如果启用了PAPI，则处理PAPI变量
         if (papiEnabled) {

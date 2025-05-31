@@ -15,6 +15,7 @@
 ### 🎨 消息格式支持
 - **原版颜色代码** - 支持 `&a`, `&b`, `&c` 等颜色代码
 - **原版格式代码** - 支持 `&l`, `&n`, `&o`, `&k` 等格式代码
+- **Unicode字符** - 支持货币符号（￥、₦、€）、特殊符号、表情符号等
 - **PlaceholderAPI** - 通过PAPIProxyBridge支持PlaceholderAPI变量
 - **内置变量** - 提供丰富的内置变量替换
 
@@ -72,8 +73,9 @@ messages:
     enabled: true
     tick: 60  # 3秒后发送
     messages:
-      - "&a欢迎来到服务器，%player_name%！"
+      - "&a欢迎来到服务器，%player_name%！ {unicode:smile}"
       - "&7当前在线玩家数：&a%server_online%"
+      - "&7你的余额：&e{unicode:yen}1000 {unicode:star}"
 
   # 首次加入消息
   first_join:
@@ -98,6 +100,37 @@ messages:
 - `tick: 60` - 3秒后发送 (60 × 50ms)
 
 通过不同的tick值，可以控制消息的发送顺序，避免消息互相干扰。
+
+### Unicode字符支持
+
+MessageTools支持在消息中使用Unicode字符，让你的消息更加丰富：
+
+#### 命名Unicode占位符
+```yaml
+messages:
+  join:
+    messages:
+      - "欢迎 %player_name%！ {unicode:star}"
+      - "你的余额: {unicode:yen}1000"
+      - "方向: {unicode:arrow_right} 商店"
+```
+
+#### 常用Unicode符号
+- **货币**: `{unicode:yen}` → ￥, `{unicode:euro}` → €, `{unicode:dollar}` → $
+- **箭头**: `{unicode:arrow_right}` → →, `{unicode:arrow_left}` → ←
+- **符号**: `{unicode:star}` → ★, `{unicode:heart}` → ♥, `{unicode:smile}` → ☺
+- **游戏**: `{unicode:sword}` → ⚔, `{unicode:shield}` → 🛡, `{unicode:pickaxe}` → ⛏
+
+#### 十六进制Unicode
+```yaml
+messages:
+  special:
+    messages:
+      - "特殊符号: {u:FFE5}"  # ￥
+      - "星星: {u:2605}"      # ★
+```
+
+详细的Unicode字符列表请查看 `UNICODE_FEATURE.md` 文档。
 
 ### 内置变量
 
@@ -238,7 +271,13 @@ A: 检查是否通过Velocity代理加入，而不是直接连接后端服务器
 
 ## 更新日志
 
-### v1.6-SNAPSHOT (当前版本)
+### v1.7-SNAPSHOT (当前版本)
+- 🌟 **Unicode字符支持** - 支持货币符号（￥、₦、€）、特殊符号、表情符号等
+- 📝 **命名Unicode占位符** - 使用 `{unicode:name}` 格式插入预定义Unicode字符
+- 🔢 **十六进制Unicode** - 使用 `{u:XXXX}` 格式插入任意Unicode字符
+- 🎮 **丰富符号库** - 内置80+常用Unicode符号，涵盖货币、箭头、游戏、天气等
+
+### v1.6-SNAPSHOT
 - 🎯 **真正的统一延迟** - 同一类别的所有消息在指定tick后同时发出
 - 📦 **消除割裂感** - 移除消息组内部延迟，消息作为完整信息块出现
 - 🔧 **优化显示效果** - 每个消息类别保持完整性，不被其他类别打断

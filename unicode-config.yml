@@ -1,0 +1,179 @@
+# MessageTools Unicode字符支持配置
+# 展示如何在消息中使用Unicode字符
+
+# 消息配置 - 包含Unicode字符
+messages:
+  # 首次加入消息 - 使用Unicode装饰
+  first_join:
+    enabled: true
+    tick: 10
+    messages:
+      - "&6{unicode:star} &l新玩家加入 &6{unicode:star}"
+      - "&e欢迎 &f%player_name% &e第一次来到我们的服务器！"
+      - "&7让我们热烈欢迎这位新朋友！ {unicode:heart}"
+      - "&d{unicode:music} 愿你在这里度过愉快的时光~ {unicode:music}"
+  
+  # 普通加入消息 - 使用箭头和符号
+  join:
+    enabled: true
+    tick: 30
+    messages:
+      - "&a[+] &f%player_name% &7加入了服务器 {unicode:arrow_right}"
+      - "&7欢迎回到我们的社区！ {unicode:smile}"
+      - "&7当前在线：&b%server_online%&7人 {unicode:info}"
+  
+  # 私人欢迎消息 - 使用各种Unicode符号
+  message:
+    enabled: true
+    tick: 80
+    messages:
+      - "&6{unicode:star} &e欢迎来到我们的服务器 &6{unicode:star}"
+      - "&a你好，%player_name%！ {unicode:smile}"
+      - "&7服务器时间：&e%server_time_HH:mm:ss% {unicode:info}"
+      - "&7在线玩家：&b%server_online%&7/&b%server_max% {unicode:arrow_up}"
+      - "&7你的IP地址：&c%player_ip% {unicode:shield}"
+      - "&e{unicode:yen} &7经济系统已启用"
+      - "&e{unicode:sword} &7PvP区域: 北方战场 {unicode:north}"
+      - "&e{unicode:pickaxe} &7挖矿世界: 地下城 {unicode:arrow_down}"
+      - "&7输入 &e/help &7查看帮助命令 {unicode:info}"
+      - "&6{unicode:star}{unicode:star}{unicode:star}{unicode:star}{unicode:star}"
+  
+  # 退出消息 - 使用表情符号
+  quit:
+    enabled: true
+    tick: 0
+    messages:
+      - "&c[-] &f%player_name% &7离开了服务器 {unicode:arrow_left}"
+      - "&8希望你很快回来！ {unicode:heart_empty}"
+      
+  # 首次退出消息 - 使用特殊符号
+  first_quit:
+    enabled: true
+    tick: 0
+    messages:
+      - "&6{unicode:star} &f%player_name% &e第一次离开了服务器"
+      - "&7期待你的再次光临！ {unicode:heart}"
+
+# 控制台输出配置 - 也支持Unicode
+console:
+  enabled: true
+  format:
+    join: "[MessageTools] {unicode:arrow_right} 玩家 %player_name% 加入了服务器 (IP: %player_ip%)"
+    quit: "[MessageTools] {unicode:arrow_left} 玩家 %player_name% 离开了服务器"
+    first_join: "[MessageTools] {unicode:star} 新玩家 %player_name% 第一次加入服务器"
+    first_quit: "[MessageTools] {unicode:star} 新玩家 %player_name% 第一次离开服务器"
+
+# 消息发送延迟配置
+delays:
+  between_messages: 400
+  after_join: 1000
+
+# 数据存储配置
+storage:
+  player_data_file: "playerdata.yml"
+  auto_save: true
+  auto_save_interval: 5
+
+# PlaceholderAPI集成配置
+placeholderapi:
+  enabled: false
+  timeout: 1000
+
+# 调试配置
+debug:
+  enabled: true
+  verbose_events: true
+  verbose_config: false
+
+# Unicode字符使用说明：
+#
+# 1. 命名Unicode占位符格式: {unicode:name}
+#    例如: {unicode:yen} → ￥
+#          {unicode:star} → ★
+#          {unicode:heart} → ♥
+#
+# 2. 十六进制Unicode占位符格式: {u:XXXX}
+#    例如: {u:FFE5} → ￥
+#          {u:2605} → ★
+#          {u:2665} → ♥
+#
+# 3. 可用的Unicode符号：
+#
+#    货币符号:
+#    - {unicode:yen} 或 {unicode:yuan} → ￥ (日元/人民币)
+#    - {unicode:euro} → € (欧元)
+#    - {unicode:dollar} → $ (美元)
+#    - {unicode:pound} → £ (英镑)
+#    - {unicode:naira} → ₦ (奈拉)
+#    - {unicode:won} → ₩ (韩元)
+#    - {unicode:rupee} → ₹ (卢比)
+#    - {unicode:ruble} → ₽ (卢布)
+#
+#    箭头符号:
+#    - {unicode:arrow_right} → →
+#    - {unicode:arrow_left} → ←
+#    - {unicode:arrow_up} → ↑
+#    - {unicode:arrow_down} → ↓
+#    - {unicode:arrow_double_right} → ⇒
+#    - {unicode:arrow_double_left} → ⇐
+#
+#    特殊符号:
+#    - {unicode:star} → ★ (实心星星)
+#    - {unicode:star_empty} → ☆ (空心星星)
+#    - {unicode:heart} → ♥ (红心)
+#    - {unicode:heart_empty} → ♡ (空心红心)
+#    - {unicode:diamond} → ♦ (钻石)
+#    - {unicode:club} → ♣ (梅花)
+#    - {unicode:spade} → ♠ (黑桃)
+#    - {unicode:music} → ♪ (音符)
+#    - {unicode:note} → ♫ (音符)
+#
+#    表情符号:
+#    - {unicode:smile} → ☺ (笑脸)
+#    - {unicode:frown} → ☹ (哭脸)
+#    - {unicode:check} → ✓ (对勾)
+#    - {unicode:cross} → ✗ (叉号)
+#    - {unicode:warning} → ⚠ (警告)
+#    - {unicode:info} → ℹ (信息)
+#
+#    方向符号:
+#    - {unicode:north} → ⬆ (北)
+#    - {unicode:south} → ⬇ (南)
+#    - {unicode:east} → ➡ (东)
+#    - {unicode:west} → ⬅ (西)
+#
+#    游戏相关符号:
+#    - {unicode:sword} → ⚔ (剑)
+#    - {unicode:shield} → 🛡 (盾牌)
+#    - {unicode:bow} → 🏹 (弓箭)
+#    - {unicode:pickaxe} → ⛏ (镐子)
+#    - {unicode:hammer} → 🔨 (锤子)
+#
+#    天气符号:
+#    - {unicode:sun} → ☀ (太阳)
+#    - {unicode:cloud} → ☁ (云)
+#    - {unicode:rain} → ☔ (雨)
+#    - {unicode:snow} → ❄ (雪花)
+#    - {unicode:lightning} → ⚡ (闪电)
+#
+#    数学符号:
+#    - {unicode:infinity} → ∞ (无穷大)
+#    - {unicode:plus_minus} → ± (正负号)
+#    - {unicode:multiply} → × (乘号)
+#    - {unicode:divide} → ÷ (除号)
+#    - {unicode:not_equal} → ≠ (不等号)
+#    - {unicode:less_equal} → ≤ (小于等于)
+#    - {unicode:greater_equal} → ≥ (大于等于)
+#
+# 4. 使用技巧：
+#    - Unicode字符会在变量替换之前处理
+#    - 支持大小写不敏感的名称
+#    - 可以在同一条消息中混合使用多个Unicode字符
+#    - 无效的Unicode占位符会保持原样显示
+#
+# 5. 示例用法：
+#    "你的余额: {unicode:yen}1000 {unicode:star}"
+#    → "你的余额: ￥1000 ★"
+#
+#    "方向: {unicode:north} 北方 {unicode:arrow_up}"
+#    → "方向: ⬆ 北方 ↑"

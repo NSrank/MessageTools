@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @Plugin(
         id = "messagetools",
         name = "MessageTools",
-        version = "1.6-SNAPSHOT",
+        version = "1.7-SNAPSHOT",
         description = "A Velocity plugin for customizable join/quit messages with PlaceholderAPI support",
         authors = {"NSrank & Augment"}
 )
@@ -73,7 +73,7 @@ public class MessageTools {
             startAutoSaveTask();
 
             logger.info("===================================");
-            logger.info("MessageTools v1.6 已加载");
+            logger.info("MessageTools v1.7 已加载");
             logger.info("作者：NSrank & Augment");
             logger.info("===================================");
 

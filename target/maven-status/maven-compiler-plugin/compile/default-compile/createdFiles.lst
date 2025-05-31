@@ -1,4 +1,5 @@
 org\plugin\messagetools\data\PlayerDataManager$PlayerData.class
+org\plugin\messagetools\util\UnicodeUtil.class
 org\plugin\messagetools\listener\PlayerEventListener.class
 org\plugin\messagetools\config\ConfigManager.class
 org\plugin\messagetools\util\ColorUtil.class
