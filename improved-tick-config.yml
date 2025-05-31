@@ -1,0 +1,121 @@
+# MessageTools 改进版Tick配置
+# 同一类别的消息现在会作为整体在指定tick后一起发送，避免割裂感
+
+# 消息配置 - 改进的tick延迟发送
+messages:
+  # 首次加入消息 - 0.5秒后作为整体发送
+  first_join:
+    enabled: true
+    tick: 10  # 10tick = 0.5秒后，整个消息组一起开始发送
+    messages:
+      - "&6★ &l新玩家加入 &6★"
+      - "&e欢迎 &f%player_name% &e第一次来到我们的服务器！"
+      - "&7让我们热烈欢迎这位新朋友！"
+      - "&d&o愿你在这里度过愉快的时光~"
+  
+  # 普通加入消息 - 1.5秒后作为整体发送
+  join:
+    enabled: true
+    tick: 30  # 30tick = 1.5秒后，整个消息组一起开始发送
+    messages:
+      - "&a[+] &f%player_name% &7加入了服务器"
+      - "&7欢迎回到我们的社区！"
+      - "&7当前在线：&b%server_online%&7人"
+  
+  # 私人欢迎消息 - 4秒后作为整体发送
+  message:
+    enabled: true
+    tick: 80  # 80tick = 4秒后，整个消息组一起开始发送
+    messages:
+      - "&6=== &e欢迎来到我们的服务器 &6==="
+      - "&a你好，%player_name%！"
+      - "&7服务器时间：&e%server_time_HH:mm:ss%"
+      - "&7在线玩家：&b%server_online%&7/&b%server_max%"
+      - "&7你的IP地址：&c%player_ip%"
+      - "&7输入 &e/help &7查看帮助命令"
+      - "&6=========================="
+  
+  # 退出消息 - 立即作为整体发送
+  quit:
+    enabled: true
+    tick: 0  # 立即发送整个消息组
+    messages:
+      - "&c[-] &f%player_name% &7离开了服务器"
+      - "&8希望你很快回来！"
+      
+  # 首次退出消息 - 立即作为整体发送
+  first_quit:
+    enabled: true
+    tick: 0  # 立即发送整个消息组
+    messages:
+      - "&6★ &f%player_name% &e第一次离开了服务器"
+      - "&7期待你的再次光临！"
+
+# 控制台输出配置
+console:
+  enabled: true
+  format:
+    join: "[MessageTools] 玩家 %player_name% 加入了服务器 (IP: %player_ip%)"
+    quit: "[MessageTools] 玩家 %player_name% 离开了服务器"
+    first_join: "[MessageTools] 新玩家 %player_name% 第一次加入服务器"
+    first_quit: "[MessageTools] 新玩家 %player_name% 第一次离开服务器"
+
+# 消息发送延迟配置 (单位：毫秒)
+delays:
+  # 同一类别内消息之间的发送间隔
+  between_messages: 400  # 每条消息间隔400ms，保持连贯性
+  # 这个配置现在被tick配置取代
+  after_join: 1000
+
+# 数据存储配置
+storage:
+  player_data_file: "playerdata.yml"
+  auto_save: true
+  auto_save_interval: 5
+
+# PlaceholderAPI集成配置 - 禁用以获得最佳性能
+placeholderapi:
+  enabled: false
+  timeout: 1000
+
+# 调试配置 - 启用以查看改进的tick调度详情
+debug:
+  enabled: true
+  verbose_events: true
+  verbose_config: false
+
+# 改进后的Tick功能说明：
+# 
+# 现在的工作方式：
+# 1. 每个消息类别在指定的tick时间后开始发送
+# 2. 同一类别的所有消息作为一个整体，按顺序连续发送
+# 3. 类别内的消息间隔由 delays.between_messages 控制
+# 4. 避免了不同类别消息的割裂感
+#
+# 实际效果演示（首次加入玩家）：
+# 
+# 时间轴：
+# 0.0秒 - 玩家连接到服务器
+# 0.5秒 - 开始发送 first_join 消息组：
+#         ★ 新玩家加入 ★
+#         欢迎 PlayerName 第一次来到我们的服务器！
+#         让我们热烈欢迎这位新朋友！
+#         愿你在这里度过愉快的时光~
+# 1.5秒 - 开始发送 join 消息组：
+#         [+] PlayerName 加入了服务器
+#         欢迎回到我们的社区！
+#         当前在线：5人
+# 4.0秒 - 开始发送 message 消息组：
+#         === 欢迎来到我们的服务器 ===
+#         你好，PlayerName！
+#         服务器时间：21:30:15
+#         在线玩家：5/100
+#         你的IP地址：192.168.1.100
+#         输入 /help 查看帮助命令
+#         ===========================
+#
+# 优势：
+# - 每个消息类别保持完整性，不会被其他类别打断
+# - 消息按逻辑分组，更容易阅读和理解
+# - 避免了消息混乱和割裂感
+# - 保持了专业的用户体验

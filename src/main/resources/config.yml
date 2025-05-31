@@ -1,0 +1,87 @@
+# MessageTools 配置文件
+# 支持原版颜色代码 (&a, &b, &c等) 和格式代码 (&l, &n, &o等)
+# 支持PlaceholderAPI变量 (需要PAPIProxyBridge)
+
+# 消息配置
+messages:
+  # 玩家加入群组服时在全服聊天中发送的消息
+  join:
+    enabled: true
+    tick: 20  # 玩家加入后20tick(1秒)后发送
+    messages:
+      - "&a[+] &f%player_name% &7加入了服务器"
+      - "&7欢迎 &a%player_name% &7来到我们的服务器！"
+
+  # 玩家退出群组服时在全服聊天中发送的消息
+  quit:
+    enabled: true
+    tick: 0  # 立即发送
+    messages:
+      - "&c[-] &f%player_name% &7离开了服务器"
+
+  # 玩家加入时向玩家发送的私人消息
+  message:
+    enabled: true
+    tick: 60  # 玩家加入后60tick(3秒)后发送
+    messages:
+      - "&a欢迎来到服务器，%player_name%！"
+      - "&7当前在线玩家数：&a%server_online%"
+      - "&7服务器时间：&e%server_time_HH:mm:ss%"
+
+  # 玩家第一次加入时在全服聊天中发送的消息
+  first_join:
+    enabled: true
+    tick: 10  # 玩家加入后10tick(0.5秒)后发送，优先于普通加入消息
+    messages:
+      - "&6★ &f%player_name% &e第一次加入了服务器！"
+      - "&e让我们热烈欢迎新玩家！"
+
+  # 玩家第一次退出时在全服聊天中发送的消息
+  first_quit:
+    enabled: true
+    tick: 0  # 立即发送
+    messages:
+      - "&6★ &f%player_name% &e第一次离开了服务器"
+
+# 控制台输出配置
+console:
+  # 是否在控制台输出玩家加入/退出信息
+  enabled: true
+  # 输出格式
+  format:
+    join: "[MessageTools] 玩家 %player_name% 加入了服务器 (IP: %player_ip%)"
+    quit: "[MessageTools] 玩家 %player_name% 离开了服务器"
+    first_join: "[MessageTools] 新玩家 %player_name% 第一次加入服务器"
+    first_quit: "[MessageTools] 新玩家 %player_name% 第一次离开服务器"
+
+# 消息发送延迟配置 (单位：毫秒)
+delays:
+  # 消息之间的发送间隔
+  between_messages: 500
+  # 玩家加入后的延迟发送时间
+  after_join: 1000
+
+# 数据存储配置
+storage:
+  # 玩家数据文件名
+  player_data_file: "playerdata.yml"
+  # 是否自动保存数据
+  auto_save: true
+  # 自动保存间隔 (单位：分钟)
+  auto_save_interval: 5
+
+# PlaceholderAPI集成配置
+placeholderapi:
+  # 是否启用PlaceholderAPI支持
+  enabled: true
+  # 变量解析超时时间 (单位：毫秒)
+  timeout: 1000
+
+# 调试配置
+debug:
+  # 是否启用调试模式
+  enabled: false
+  # 是否输出详细的事件处理日志
+  verbose_events: false
+  # 是否输出配置加载日志
+  verbose_config: false

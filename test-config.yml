@@ -1,0 +1,78 @@
+# MessageTools 测试配置文件
+# 这是一个简化的配置文件，用于快速测试插件功能
+# 将此文件重命名为 config.yml 并放在 plugins/MessageTools/ 目录下
+
+# 消息配置 - 简化版本用于测试
+messages:
+  # 玩家加入消息 - 启用并设置简单消息
+  join:
+    enabled: true
+    messages:
+      - "TEST: %player_name% joined the server"
+      - "Welcome to our test server!"
+
+  # 玩家退出消息
+  quit:
+    enabled: true
+    messages:
+      - "TEST: %player_name% left the server"
+
+  # 私人欢迎消息
+  message:
+    enabled: true
+    messages:
+      - "Hello %player_name%! This is a test message."
+      - "Server online: %server_online% players"
+
+  # 首次加入消息
+  first_join:
+    enabled: true
+    messages:
+      - "FIRST JOIN: Welcome new player %player_name%!"
+
+  # 首次退出消息
+  first_quit:
+    enabled: true
+    messages:
+      - "FIRST QUIT: %player_name% left for the first time"
+
+# 控制台输出配置 - 启用详细日志
+console:
+  enabled: true
+  format:
+    join: "[MessageTools TEST] Player %player_name% joined from %player_ip%"
+    quit: "[MessageTools TEST] Player %player_name% left the server"
+    first_join: "[MessageTools TEST] NEW PLAYER %player_name% first join!"
+    first_quit: "[MessageTools TEST] NEW PLAYER %player_name% first quit!"
+
+# 消息发送延迟配置 - 减少延迟以便快速测试
+delays:
+  # 消息之间的发送间隔 (毫秒) - 减少到200ms
+  between_messages: 200
+  # 玩家加入后的延迟发送时间 (毫秒) - 减少到500ms
+  after_join: 500
+
+# 数据存储配置
+storage:
+  # 玩家数据文件名
+  player_data_file: "playerdata.yml"
+  # 是否自动保存数据
+  auto_save: true
+  # 自动保存间隔 (单位：分钟) - 增加频率用于测试
+  auto_save_interval: 1
+
+# PlaceholderAPI集成配置
+placeholderapi:
+  # 是否启用PlaceholderAPI支持
+  enabled: true
+  # 变量解析超时时间 (毫秒)
+  timeout: 1000
+
+# 调试配置 - 测试时启用
+debug:
+  # 是否启用调试模式
+  enabled: true
+  # 是否输出详细的事件处理日志
+  verbose_events: true
+  # 是否输出配置加载日志
+  verbose_config: true

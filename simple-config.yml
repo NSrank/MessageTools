@@ -1,0 +1,89 @@
+# MessageTools 简化配置文件
+# 使用内置变量，禁用PlaceholderAPI以获得最佳性能和稳定性
+
+# 消息配置
+messages:
+  # 玩家加入消息
+  join:
+    enabled: true
+    messages:
+      - "&a[+] &f%player_name% &7加入了服务器"
+      - "&7欢迎来到我们的社区！"
+  
+  # 玩家退出消息
+  quit:
+    enabled: true
+    messages:
+      - "&c[-] &f%player_name% &7离开了服务器"
+      
+  # 私人欢迎消息
+  message:
+    enabled: true
+    messages:
+      - "&a欢迎来到服务器，%player_name%！"
+      - "&7当前在线玩家：&b%server_online%&7人"
+      - "&7服务器时间：&e%server_time_HH:mm:ss%"
+      
+  # 首次加入消息
+  first_join:
+    enabled: true
+    messages:
+      - "&6★ &e新玩家 &f%player_name% &e第一次加入了服务器！"
+      - "&7让我们热烈欢迎这位新朋友！"
+      
+  # 首次退出消息
+  first_quit:
+    enabled: true
+    messages:
+      - "&6★ &f%player_name% &e第一次离开了服务器"
+
+# 控制台输出配置
+console:
+  enabled: true
+  format:
+    join: "[MessageTools] 玩家 %player_name% 加入了服务器 (IP: %player_ip%)"
+    quit: "[MessageTools] 玩家 %player_name% 离开了服务器"
+    first_join: "[MessageTools] 新玩家 %player_name% 第一次加入服务器"
+    first_quit: "[MessageTools] 新玩家 %player_name% 第一次离开服务器"
+
+# 消息发送延迟配置 (单位：毫秒)
+delays:
+  # 消息之间的发送间隔
+  between_messages: 500
+  # 玩家加入后的延迟发送时间
+  after_join: 1000
+
+# 数据存储配置
+storage:
+  # 玩家数据文件名
+  player_data_file: "playerdata.yml"
+  # 是否自动保存数据
+  auto_save: true
+  # 自动保存间隔 (单位：分钟)
+  auto_save_interval: 5
+
+# PlaceholderAPI集成配置 - 禁用以避免错误
+placeholderapi:
+  # 是否启用PlaceholderAPI支持
+  enabled: false
+  # 变量解析超时时间 (单位：毫秒)
+  timeout: 1000
+
+# 调试配置 - 生产环境建议关闭
+debug:
+  # 是否启用调试模式
+  enabled: false
+  # 是否输出详细的事件处理日志
+  verbose_events: false
+  # 是否输出配置加载日志
+  verbose_config: false
+
+# 内置变量说明：
+# %player_name% - 玩家用户名
+# %player_uuid% - 玩家UUID
+# %player_ip% - 玩家IP地址
+# %server_online% - 当前在线玩家数
+# %server_max% - 服务器最大玩家数
+# %server_time_HH:mm:ss% - 当前时间 (时:分:秒)
+# %server_time_yyyy-MM-dd% - 当前日期 (年-月-日)
+# %server_time_yyyy-MM-dd HH:mm:ss% - 当前日期时间

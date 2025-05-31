@@ -1,0 +1,8 @@
+{
+  "id": "messagetools",
+  "name": "MessageTools",
+  "version": "1.6-SNAPSHOT",
+  "description": "A Velocity plugin for customizable join/quit messages with PlaceholderAPI support",
+  "authors": ["NSrank & Augment"],
+  "main": "org.plugin.messagetools.MessageTools"
+}

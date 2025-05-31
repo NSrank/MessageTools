@@ -1,0 +1,101 @@
+# MessageTools Tick定时发送测试配置
+# 演示如何使用tick选项控制消息发送顺序
+
+# 消息配置 - 带有tick定时控制
+messages:
+  # 首次加入消息 - 最先发送 (0.5秒后)
+  first_join:
+    enabled: true
+    tick: 10  # 10tick = 0.5秒
+    messages:
+      - "&6★ &e新玩家 &f%player_name% &e第一次加入了服务器！"
+      - "&e让我们热烈欢迎这位新朋友！"
+  
+  # 普通加入消息 - 第二发送 (1秒后)
+  join:
+    enabled: true
+    tick: 20  # 20tick = 1秒
+    messages:
+      - "&a[+] &f%player_name% &7加入了服务器"
+      - "&7欢迎 &a%player_name% &7来到我们的服务器！"
+  
+  # 私人欢迎消息 - 最后发送 (3秒后)
+  message:
+    enabled: true
+    tick: 60  # 60tick = 3秒
+    messages:
+      - "&a欢迎来到服务器，%player_name%！"
+      - "&7当前在线玩家：&b%server_online%&7人"
+      - "&7服务器时间：&e%server_time_HH:mm:ss%"
+      - "&7你是第 &a%server_online% &7个在线的玩家"
+  
+  # 退出消息 - 立即发送
+  quit:
+    enabled: true
+    tick: 0  # 0tick = 立即发送
+    messages:
+      - "&c[-] &f%player_name% &7离开了服务器"
+      
+  # 首次退出消息 - 立即发送
+  first_quit:
+    enabled: true
+    tick: 0  # 0tick = 立即发送
+    messages:
+      - "&6★ &f%player_name% &e第一次离开了服务器"
+
+# 控制台输出配置
+console:
+  enabled: true
+  format:
+    join: "[MessageTools] 玩家 %player_name% 加入了服务器 (IP: %player_ip%)"
+    quit: "[MessageTools] 玩家 %player_name% 离开了服务器"
+    first_join: "[MessageTools] 新玩家 %player_name% 第一次加入服务器"
+    first_quit: "[MessageTools] 新玩家 %player_name% 第一次离开服务器"
+
+# 消息发送延迟配置 (单位：毫秒)
+# 注意：这个配置现在主要控制同一类型消息内部的间隔
+delays:
+  # 同一类型消息之间的发送间隔
+  between_messages: 300
+  # 这个配置现在被tick配置取代
+  after_join: 1000
+
+# 数据存储配置
+storage:
+  player_data_file: "playerdata.yml"
+  auto_save: true
+  auto_save_interval: 5
+
+# PlaceholderAPI集成配置 - 禁用以获得最佳性能
+placeholderapi:
+  enabled: false
+  timeout: 1000
+
+# 调试配置 - 启用以查看tick调度详情
+debug:
+  enabled: true
+  verbose_events: true
+  verbose_config: true
+
+# Tick配置说明：
+# tick: 0   - 立即发送
+# tick: 10  - 0.5秒后发送 (10 * 50ms = 500ms)
+# tick: 20  - 1秒后发送 (20 * 50ms = 1000ms)
+# tick: 40  - 2秒后发送 (40 * 50ms = 2000ms)
+# tick: 60  - 3秒后发送 (60 * 50ms = 3000ms)
+# tick: 100 - 5秒后发送 (100 * 50ms = 5000ms)
+
+# 推荐的发送顺序：
+# 1. first_join (tick: 10) - 首次加入消息最先显示
+# 2. join (tick: 20) - 普通加入消息其次
+# 3. message (tick: 60) - 私人消息最后，给玩家时间适应
+
+# 内置变量列表：
+# %player_name% - 玩家用户名
+# %player_uuid% - 玩家UUID
+# %player_ip% - 玩家IP地址
+# %server_online% - 当前在线玩家数
+# %server_max% - 服务器最大玩家数
+# %server_time_HH:mm:ss% - 当前时间 (时:分:秒)
+# %server_time_yyyy-MM-dd% - 当前日期 (年-月-日)
+# %server_time_yyyy-MM-dd HH:mm:ss% - 当前日期时间

@@ -1,0 +1,131 @@
+# MessageTools 统一延迟配置
+# 同一类别的所有消息现在会在指定tick后同时发出，真正避免割裂感
+
+# 消息配置 - 统一延迟后同时发出
+messages:
+  # 首次加入消息 - 0.5秒后同时发出所有消息
+  first_join:
+    enabled: true
+    tick: 10  # 10tick = 0.5秒后，所有消息同时发出
+    messages:
+      - "&6★ &l新玩家加入 &6★"
+      - "&e欢迎 &f%player_name% &e第一次来到我们的服务器！"
+      - "&7让我们热烈欢迎这位新朋友！"
+      - "&d&o愿你在这里度过愉快的时光~"
+  
+  # 普通加入消息 - 1.5秒后同时发出所有消息
+  join:
+    enabled: true
+    tick: 30  # 30tick = 1.5秒后，所有消息同时发出
+    messages:
+      - "&a[+] &f%player_name% &7加入了服务器"
+      - "&7欢迎回到我们的社区！"
+      - "&7当前在线：&b%server_online%&7人"
+  
+  # 私人欢迎消息 - 4秒后同时发出所有消息
+  message:
+    enabled: true
+    tick: 80  # 80tick = 4秒后，所有消息同时发出
+    messages:
+      - "&6=== &e欢迎来到我们的服务器 &6==="
+      - "&a你好，%player_name%！"
+      - "&7服务器时间：&e%server_time_HH:mm:ss%"
+      - "&7在线玩家：&b%server_online%&7/&b%server_max%"
+      - "&7你的IP地址：&c%player_ip%"
+      - "&7输入 &e/help &7查看帮助命令"
+      - "&6=========================="
+  
+  # 退出消息 - 立即同时发出所有消息
+  quit:
+    enabled: true
+    tick: 0  # 立即同时发出所有消息
+    messages:
+      - "&c[-] &f%player_name% &7离开了服务器"
+      - "&8希望你很快回来！"
+      
+  # 首次退出消息 - 立即同时发出所有消息
+  first_quit:
+    enabled: true
+    tick: 0  # 立即同时发出所有消息
+    messages:
+      - "&6★ &f%player_name% &e第一次离开了服务器"
+      - "&7期待你的再次光临！"
+
+# 控制台输出配置
+console:
+  enabled: true
+  format:
+    join: "[MessageTools] 玩家 %player_name% 加入了服务器 (IP: %player_ip%)"
+    quit: "[MessageTools] 玩家 %player_name% 离开了服务器"
+    first_join: "[MessageTools] 新玩家 %player_name% 第一次加入服务器"
+    first_quit: "[MessageTools] 新玩家 %player_name% 第一次离开服务器"
+
+# 消息发送延迟配置 (单位：毫秒)
+# 注意：between_messages 现在不再使用，因为同一类别的消息会同时发出
+delays:
+  between_messages: 500  # 此配置现在不再影响消息发送
+  after_join: 1000       # 此配置被tick配置取代
+
+# 数据存储配置
+storage:
+  player_data_file: "playerdata.yml"
+  auto_save: true
+  auto_save_interval: 5
+
+# PlaceholderAPI集成配置 - 禁用以获得最佳性能
+placeholderapi:
+  enabled: false
+  timeout: 1000
+
+# 调试配置 - 启用以查看统一延迟的详细信息
+debug:
+  enabled: true
+  verbose_events: true
+  verbose_config: false
+
+# 统一延迟功能说明：
+# 
+# 现在的工作方式：
+# 1. 每个消息类别在指定的tick时间后开始发送
+# 2. 同一类别的所有消息会同时发出，没有内部间隔
+# 3. 不同类别之间仍然按tick值控制发送时机
+# 4. 真正避免了同一类别内消息的割裂感
+#
+# 实际效果演示（首次加入玩家）：
+# 
+# 时间轴：
+# 0.0秒 - 玩家连接到服务器
+# 0.5秒 - 同时发出 first_join 的所有消息：
+#         ★ 新玩家加入 ★
+#         欢迎 PlayerName 第一次来到我们的服务器！
+#         让我们热烈欢迎这位新朋友！
+#         愿你在这里度过愉快的时光~
+# 1.5秒 - 同时发出 join 的所有消息：
+#         [+] PlayerName 加入了服务器
+#         欢迎回到我们的社区！
+#         当前在线：5人
+# 4.0秒 - 同时发出 message 的所有消息：
+#         === 欢迎来到我们的服务器 ===
+#         你好，PlayerName！
+#         服务器时间：21:30:15
+#         在线玩家：5/100
+#         你的IP地址：192.168.1.100
+#         输入 /help 查看帮助命令
+#         ===========================
+#
+# 优势：
+# - 每个消息类别作为完整的信息块同时出现
+# - 不会有消息被其他类别打断
+# - 消息显示更加整齐和专业
+# - 避免了任何形式的割裂感
+# - 玩家可以一次性看到完整的信息组
+
+# 内置变量列表：
+# %player_name% - 玩家用户名
+# %player_uuid% - 玩家UUID
+# %player_ip% - 玩家IP地址
+# %server_online% - 当前在线玩家数
+# %server_max% - 服务器最大玩家数
+# %server_time_HH:mm:ss% - 当前时间 (时:分:秒)
+# %server_time_yyyy-MM-dd% - 当前日期 (年-月-日)
+# %server_time_yyyy-MM-dd HH:mm:ss% - 当前日期时间
